@@ -1,0 +1,27 @@
+# Virtual environment
+venv/
+.venv/
+
+# ChromaDB (generated, not source code)
+chroma_db/
+
+# Environment variables / secrets
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Eval results (generated output, not source)
+tests/eval_results.json
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE folders
+.vscode/
+.idea/
