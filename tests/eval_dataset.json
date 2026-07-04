@@ -1,0 +1,212 @@
+[
+  {
+    "id": "e001",
+    "question": "What is a high-protein breakfast option?",
+    "expected_keywords": ["protein", "egg", "chicken", "oat"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e002",
+    "question": "Suggest a vegan dinner with no animal products.",
+    "expected_keywords": ["vegan", "chickpea", "lentil", "tofu", "black bean"],
+    "must_not_contain": ["chicken", "beef", "shrimp", "turkey", "salmon", "egg", "dairy", "milk"],
+    "category": "dietary_constraint"
+  },
+  {
+    "id": "e003",
+    "question": "What meals are safe for someone with a peanut allergy?",
+    "expected_keywords": ["peanut", "allerg", "safe"],
+    "must_not_contain": ["peanut butter", "peanuts"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e004",
+    "question": "What is a good lunch for weight loss under 400 calories?",
+    "expected_keywords": ["weight", "calor", "low", "wrap", "lettuce"],
+    "must_not_contain": [],
+    "category": "calorie_constraint"
+  },
+  {
+    "id": "e005",
+    "question": "Give me a gluten-free dinner option.",
+    "expected_keywords": ["gluten-free", "rice", "salmon", "curry", "stew"],
+    "must_not_contain": ["pasta", "wrap", "bread", "oat", "granola"],
+    "category": "dietary_constraint"
+  },
+  {
+    "id": "e006",
+    "question": "What meal has the most protein?",
+    "expected_keywords": ["protein", "chicken", "salmon", "turkey", "tuna"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e007",
+    "question": "What should I eat for muscle gain?",
+    "expected_keywords": ["protein", "muscle", "chicken", "calor"],
+    "must_not_contain": [],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e008",
+    "question": "What is a budget-friendly vegetarian meal?",
+    "expected_keywords": ["budget", "vegetarian", "bean", "lentil", "chickpea"],
+    "must_not_contain": ["beef", "salmon", "shrimp"],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e009",
+    "question": "I am allergic to shellfish. What dinners can I eat?",
+    "expected_keywords": ["dinner", "chicken", "beef", "salmon", "turkey", "lentil"],
+    "must_not_contain": ["shrimp"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e010",
+    "question": "What is a quick breakfast I can make in under 10 minutes?",
+    "expected_keywords": ["quick", "egg", "yogurt", "smoothie", "toast"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e011",
+    "question": "What snacks are high in protein?",
+    "expected_keywords": ["protein", "snack", "yogurt", "cottage cheese", "egg"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e012",
+    "question": "Suggest a dairy-free breakfast.",
+    "expected_keywords": ["breakfast", "egg", "avocado", "oat"],
+    "must_not_contain": ["milk", "yogurt", "cheese", "dairy"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e013",
+    "question": "What meals can I make with chicken and rice?",
+    "expected_keywords": ["chicken", "rice"],
+    "must_not_contain": [],
+    "category": "ingredient_match"
+  },
+  {
+    "id": "e014",
+    "question": "What is a good meal prep dinner?",
+    "expected_keywords": ["meal-prep", "stew", "curry", "lentil", "pasta"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e015",
+    "question": "What can I eat if I want to lose weight and avoid gluten?",
+    "expected_keywords": ["weight", "gluten-free", "low-carb", "lettuce", "salmon"],
+    "must_not_contain": ["pasta", "bread", "oat", "granola", "wrap"],
+    "category": "dietary_constraint"
+  },
+  {
+    "id": "e016",
+    "question": "What vegan meals are available?",
+    "expected_keywords": ["vegan", "lentil", "chickpea", "tofu", "black bean"],
+    "must_not_contain": ["chicken", "beef", "shrimp", "turkey", "salmon", "egg", "milk", "cheese"],
+    "category": "dietary_constraint"
+  },
+  {
+    "id": "e017",
+    "question": "I have eggs and spinach. What can I make?",
+    "expected_keywords": ["egg", "spinach", "scramble"],
+    "must_not_contain": [],
+    "category": "ingredient_match"
+  },
+  {
+    "id": "e018",
+    "question": "What dinner has the fewest calories?",
+    "expected_keywords": ["calor", "lentil", "curry", "tofu"],
+    "must_not_contain": [],
+    "category": "calorie_constraint"
+  },
+  {
+    "id": "e019",
+    "question": "What meals are good for heart health with omega-3?",
+    "expected_keywords": ["omega", "salmon", "fish"],
+    "must_not_contain": [],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e020",
+    "question": "Suggest a high-carb meal for an athlete.",
+    "expected_keywords": ["carb", "rice", "oat", "pasta", "banana"],
+    "must_not_contain": [],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e021",
+    "question": "What can I eat for breakfast if I am allergic to eggs?",
+    "expected_keywords": ["breakfast", "oat", "smoothie", "yogurt", "banana"],
+    "must_not_contain": ["egg"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e022",
+    "question": "What meals use tofu?",
+    "expected_keywords": ["tofu"],
+    "must_not_contain": [],
+    "category": "ingredient_match"
+  },
+  {
+    "id": "e023",
+    "question": "I need a soy-free dinner.",
+    "expected_keywords": ["dinner", "salmon", "beef", "lentil", "chicken"],
+    "must_not_contain": ["soy sauce", "tofu", "edamame", "soy"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e024",
+    "question": "What is a good post-workout meal with high protein and carbs?",
+    "expected_keywords": ["protein", "carb", "muscle", "chicken", "rice", "oat"],
+    "must_not_contain": [],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e025",
+    "question": "What meals can I make on a $70 per week budget?",
+    "expected_keywords": ["budget", "bean", "lentil", "egg", "rice"],
+    "must_not_contain": [],
+    "category": "goal_alignment"
+  },
+  {
+    "id": "e026",
+    "question": "Are there any fish dishes available?",
+    "expected_keywords": ["salmon", "tuna", "shrimp", "fish"],
+    "must_not_contain": [],
+    "category": "retrieval_relevance"
+  },
+  {
+    "id": "e027",
+    "question": "What is a low-fat snack option?",
+    "expected_keywords": ["low-fat", "snack", "fruit", "apple", "cottage"],
+    "must_not_contain": [],
+    "category": "calorie_constraint"
+  },
+  {
+    "id": "e028",
+    "question": "Suggest a meal for someone with both a peanut and shellfish allergy.",
+    "expected_keywords": ["chicken", "beef", "lentil", "egg", "salmon"],
+    "must_not_contain": ["peanut", "shrimp"],
+    "category": "allergen_safety"
+  },
+  {
+    "id": "e029",
+    "question": "What breakfast has the most calories for bulking?",
+    "expected_keywords": ["calor", "oat", "protein", "smoothie", "muscle"],
+    "must_not_contain": [],
+    "category": "calorie_constraint"
+  },
+  {
+    "id": "e030",
+    "question": "What meals work for a vegetarian who wants high protein?",
+    "expected_keywords": ["vegetarian", "protein", "egg", "yogurt", "cottage", "tofu"],
+    "must_not_contain": ["chicken", "beef", "shrimp", "turkey", "salmon", "tuna"],
+    "category": "dietary_constraint"
+  }
+]
