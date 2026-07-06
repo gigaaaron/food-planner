@@ -1,0 +1,31 @@
+#MainMenu,
+header,
+footer {
+    visibility: hidden;
+}
+
+.main .block-container {
+    max-width: 800px;
+    padding-top: 2rem;
+}
+
+.metric-card,
+.plan-box {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.recipe-chip {
+    display: inline-block;
+    padding: 2px 8px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    border-radius: 999px;
+    font-size: 0.8rem;
+}
+
+.stButton > button {
+    width: 100%;
+}
