@@ -1,0 +1,34 @@
+services:
+
+  ollama:
+    image: ollama/ollama
+    container_name: food_planner_ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "ollama list || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
+  app:
+    build: .
+    container_name: food_planner_app
+    ports:
+      - "8501:8501"
+    environment:
+      - OLLAMA_URL=http://ollama:11434/api/generate
+    depends_on:
+      ollama:
+        condition: service_healthy
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./tests:/app/tests
+    restart: unless-stopped
+
+volumes:
+  ollama_data:

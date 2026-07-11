@@ -1,0 +1,9 @@
+.venv
+venv
+__pycache__
+*.pyc
+.git
+chroma_db
+tests/eval_results.json
+tests/feedback_log.csv
+.env

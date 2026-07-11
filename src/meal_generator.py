@@ -7,12 +7,13 @@ Orchestrates the full RAG pipeline:
   4. Return the meal plan
 """
 
+import os
 import requests
 from src.retrieval import get_recipes_for_user
 from src.prompts   import build_meal_plan_prompt
 
-OLLAMA_URL   = "http://localhost:11434/api/generate"
-OLLAMA_MODEL = "llama3"
+OLLAMA_URL   = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3")
 
 
 def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
