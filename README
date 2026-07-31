@@ -1,0 +1,123 @@
+# AI Meal Planner
+
+A RAG-based meal planning assistant that generates personalized 7-day meal plans using a local LLM. Built to explore retrieval-augmented generation, prompt grounding, and automated evaluation.
+
+What it does
+Takes a user profile (goal, diet, allergies, calorie target, budget, available ingredients)
+Retrieves the most relevant recipes from a local vector database
+Passes only retrieved recipes to the LLM so it cannot invent meals outside the knowledge base
+Returns a 7-day plan with a shopping list, macros, and cited sources
+
+## Tech stack
+Python, LangChain
+Ollama (Llama 3)
+Sentence Transformers (all-MiniLM-L6-v2) 
+Streamlit 
+Pytest
+Docker + Docker Compose
+
+
+## How to run with Docker (recommended)
+
+Requirements: Docker Desktop
+
+bash:
+git clone https://github.com/gigaaaron/food-planner.git
+cd food-planner
+docker compose up --build
+
+First run downloads the Llama 3 model (~4.7GB) and may take 10–15 minutes. Every run after that starts in seconds.
+
+Open http://localhost:8501 once you see Starting Streamlit... in the logs.
+
+To stop:
+docker compose down
+
+
+## How to run locally without Docker
+
+Requirements: Python 3.11+, Ollama installed
+
+bash
+git clone https://github.com/gigaaaron/food-planner.git
+cd food-planner
+python -m venv venv
+venv\Scripts\activate        # Windows
+pip install -r requirements.txt
+ollama pull llama3
+python -m src.ingest
+
+Then in two terminals:
+
+bash
+ollama serve
+streamlit run streamlit_app.py
+Project structure
+food-planner/
+├── src/
+│   ├── ingest.py            # loads recipes into ChromaDB
+│   ├── retrieval.py         # queries ChromaDB
+│   ├── prompts.py           # prompt templates
+│   ├── meal_generator.py    # RAG pipeline orchestration
+│   └── evaluator.py         # eval metrics
+├── ui/
+│   ├── profile_form.py      # user input form
+│   ├── results.py           # output display
+│   └── styles.py            # UI helpers
+├── utils/
+│   └── feedback.py          # logs user feedback to CSV
+├── tests/
+│   ├── eval_dataset.json         # 30 hand-labeled eval questions
+│   ├── test_retrieval.py         # retrieval and filter tests
+│   └── test_meal_generation.py   # LLM output tests
+├── data/
+│   └── recipes.json         # 20 seed recipes
+├── styles.css
+├── Dockerfile
+└── docker-compose.yml
+
+
+## Evaluation results
+
+Evaluated against 30 hand-labeled questions across 6 categories using keyword hit rate, allergen safety, context precision, and answer relevance.
+
+Metric	Score
+Overall score	65.8%
+Pass rate (score >= 0.6)	70.0% (21/30)
+Keyword hit rate	49.3%
+Allergen safety	86.7%
+Context precision	53.3%
+Answer relevance	55.8%
+
+By category:
+
+Category	Score
+Goal alignment	79.5%
+Ingredient match	75.0%
+Dietary constraint	72.5%
+Retrieval relevance	70.7%
+Calorie constraint	69.1%
+Allergen safety (category)	35.1%
+
+The low allergen safety category score is a known scoring artifact: the eval checks whether allergen words appear anywhere in the response, which flags cases where the model correctly states "this recipe contains no peanuts." Hard filter tests in pytest confirm allergens are correctly excluded at the retrieval layer. The weakest genuine metric is keyword hit rate (49.3%), which reflects Llama 3 running on CPU without GPU acceleration — a hosted model would score meaningfully higher without any pipeline changes.
+
+Running the eval
+
+Quick run (5 questions):
+
+bash
+python -m src.evaluator
+
+Full run (30 questions, ~20 min): change the last line of src/evaluator.py from run_eval(max_questions=5) to run_eval() then run the same command. Results are saved to tests/eval_results.json.
+
+Running tests
+
+Fast tests, no LLM required:
+
+bash
+pytest tests/test_retrieval.py -v
+
+Full test suite including LLM output checks:
+
+bash
+pytest tests/test_meal_generation.py -v
