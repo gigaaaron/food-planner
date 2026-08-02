@@ -14,7 +14,7 @@ from src.prompts   import build_meal_plan_prompt
 
 OLLAMA_URL   = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3")
-
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "300"))
 
 def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
     payload = {
@@ -33,7 +33,7 @@ def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
             "Make sure Ollama is running (run 'ollama serve' in a terminal)."
         )
     except requests.exceptions.Timeout:
-        return "ERROR: Ollama request timed out. The model may still be loading — try again."
+        return(f"ERROR: Ollama request timed out after {OLLAMA_TIMEOUT}s")
     except Exception as e:
         return f"ERROR: {str(e)}"
 

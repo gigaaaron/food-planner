@@ -22,6 +22,7 @@ services:
       - "8501:8501"
     environment:
       - OLLAMA_URL=http://ollama:11434/api/generate
+      - OLLAMA_TIMEOUT=300
     depends_on:
       ollama:
         condition: service_healthy
