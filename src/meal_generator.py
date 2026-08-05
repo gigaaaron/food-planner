@@ -1,12 +1,3 @@
-"""
-meal_generator.py
-Orchestrates the full RAG pipeline:
-  1. Retrieve relevant recipes from ChromaDB
-  2. Build a prompt
-  3. Call Llama 3 via Ollama
-  4. Return the meal plan
-"""
-
 import os
 import requests
 from src.retrieval import get_recipes_for_user
@@ -14,7 +5,7 @@ from src.prompts   import build_meal_plan_prompt
 
 OLLAMA_URL   = os.getenv("OLLAMA_URL", "http://localhost:11434/api/generate")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "llama3")
-OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "300"))
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "600"))
 
 def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
     payload = {
@@ -30,10 +21,11 @@ def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
     except requests.exceptions.ConnectionError:
         return (
             "ERROR: Could not connect to Ollama. "
-            "Make sure Ollama is running (run 'ollama serve' in a terminal)."
         )
     except requests.exceptions.Timeout:
-        return(f"ERROR: Ollama request timed out after {OLLAMA_TIMEOUT}s")
+        return (
+            f"ERROR: Ollama request timed out after {OLLAMA_TIMEOUT}s."
+        )
     except Exception as e:
         return f"ERROR: {str(e)}"
 

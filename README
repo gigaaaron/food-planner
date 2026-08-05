@@ -34,6 +34,31 @@ To stop:
 docker compose down
 
 
+## Using real recipes (with source links and real nutrition facts)
+
+`data/recipes.json` ships with a placeholder set. To replace it with real recipes
+pulled from the web -- each with a working source link and real nutrition facts --
+instead of hand-authored placeholders:
+
+1. Get a free API key at https://spoonacular.com/food-api (free tier: 150 requests/day).
+2. Add it to `.env`: `SPOONACULAR_API_KEY=your_key_here`
+3. Fetch and re-index:
+
+bash
+python -m src.fetch_recipes
+python -m src.ingest
+
+(or, if running in Docker: `docker compose exec app python -m src.fetch_recipes` then
+`docker compose exec app python -m src.ingest`, followed by `docker compose restart app`)
+
+This overwrites `data/recipes.json` with real recipes across breakfast/lunch/dinner/snack,
+each carrying its original source URL and Spoonacular-reported nutrition. The app shows each recipe's source link in the "Retrieved Recipes" tab, and under the generated plan for any recipe it actually used, so you can click through to the original page for full
+cooking instructions.
+
+Allergens are derived by scanning ingredient names for common allergen keywords (dairy, eggs, gluten, peanuts, tree nuts, soy, shellfish, fish, sesame) since Spoonacular doesn't tag every allergen category directly -- treat this as a starting point, not a guarantee,
+and double check against the source recipe if you have a serious allergy.
+
+
 ## How to run locally without Docker
 
 Requirements: Python 3.11+, Ollama installed

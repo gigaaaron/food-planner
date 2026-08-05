@@ -18,12 +18,25 @@ def show_profile(user_profile):
     allergen_chips(user_profile.get("allergies", []))
 
 
-def show_meal_plan_tab(meal_plan):
+def show_meal_plan_tab(meal_plan, retrieved_recipes):
     section_label("7-Day Plan")
     st.markdown(
         f'<div class="plan-box">{meal_plan}</div>',
         unsafe_allow_html=True,
     )
+
+    used = [
+        r["metadata"] for r in retrieved_recipes
+        if r["metadata"]["name"].lower() in meal_plan.lower()
+    ]
+    if used:
+        section_label("Recipe Links")
+        for meta in used:
+            url = meta.get("source_url")
+            if url:
+                st.markdown(f"- [{meta['name']}]({url})")
+            else:
+                st.markdown(f"- {meta['name']} (no source link available)")
 
 
 def show_recipes_tab(retrieved_recipes):
@@ -41,6 +54,10 @@ def show_recipes_tab(retrieved_recipes):
 
             st.markdown(f"**Meal type:** {meta['meal_type']}")
             st.markdown(f"**Tags:** {meta.get('tags', '—')}")
+
+            url = meta.get("source_url")
+            if url:
+                st.markdown(f"**Full recipe:** [{url}]({url})")
 
             allergens = meta.get("allergens", "none")
             if allergens and allergens != "none":
@@ -83,7 +100,7 @@ def render_results(meal_data, user_profile):
     tab1, tab2, tab3 = st.tabs(["Meal Plan", "Retrieved Recipes", "Feedback"])
 
     with tab1:
-        show_meal_plan_tab(plan)
+        show_meal_plan_tab(plan, meal_data["retrieved_recipes"])
     with tab2:
         show_recipes_tab(meal_data["retrieved_recipes"])
     with tab3:

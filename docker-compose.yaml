@@ -22,13 +22,15 @@ services:
       - "8501:8501"
     environment:
       - OLLAMA_URL=http://ollama:11434/api/generate
-      - OLLAMA_TIMEOUT=300
+      - OLLAMA_TIMEOUT=600
+      - SPOONACULAR_API_KEY=${SPOONACULAR_API_KEY:-}
     depends_on:
       ollama:
         condition: service_healthy
     volumes:
       - ./chroma_db:/app/chroma_db
       - ./tests:/app/tests
+      - ./data:/app/data
     restart: unless-stopped
 
 volumes:

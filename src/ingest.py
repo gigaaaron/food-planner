@@ -28,7 +28,8 @@ def recipe_to_document(recipe: dict) -> str:
         f"Ingredients: {', '.join(recipe['ingredients'])}\n"
         f"Tags: {', '.join(recipe['tags'])}\n"
         f"Allergens: {', '.join(recipe['allergens']) if recipe['allergens'] else 'none'}\n"
-        f"Instructions: {recipe['instructions']}"
+        f"Instructions: {recipe['instructions']}\n"
+        f"Source: {recipe.get('source_url') or 'n/a'}"
     )
 
 
@@ -68,8 +69,10 @@ def build_vector_db():
             "protein_g":  r["protein_g"],
             "carbs_g":    r["carbs_g"],
             "fat_g":      r["fat_g"],
-            "tags":       ", ".join(r["tags"]),
-            "allergens":  ", ".join(r["allergens"]) if r["allergens"] else "none",
+            "tags":        ", ".join(r["tags"]),
+            "allergens":   ", ".join(r["allergens"]) if r["allergens"] else "none",
+            "ingredients": ", ".join(r["ingredients"]),
+            "source_url":  r.get("source_url") or "",
         }
         for r in recipes
     ]
